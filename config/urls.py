@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     # 1차 -> 2차 -> 3차
     # http://127.0.0.1/bookmark/?
     # http://127.0.0.1/중앙창구/외과
     # http://127.0.0.1/중앙창구/내과
+    path('', RedirectView.as_view(pattern_name='list', permanent=False)),
     path('bookmark/', include('bookmark.urls')),
     # http://127.0.0.1/admin/
     path('admin/', admin.site.urls),
